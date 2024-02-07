@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+BSC_VERBOSE=1
+BSC_MODE_CHECK_CONFIG=1
+
+currentDir=$( dirname "$( command -v "$0" )" )
+scriptsCommonUtilities="$currentDir/../scripts-common/utilities.sh"
+[ ! -f "$scriptsCommonUtilities" ] && echo -e "ERROR: scripts-common utilities not found, you must initialize your git submodule once after you cloned the repository:\ngit submodule init\ngit submodule update" >&2 && exit 1
+
+# shellcheck disable=1090
+. "$scriptsCommonUtilities"
+
+if [[ ! -f shdotenv ]]; then
+    writeMessage "Getting shdotenv..."
+    wget --quiet "https://github.com/ko1nksm/shdotenv/releases/download/v0.13.0/shdotenv"
+    chmod +x shdotenv
+fi
+eval "$(./shdotenv || echo "exit $?")"
+
+writeMessage "Starting app install..."
+
+if isRootUser; then
+    errorMessage "This script should not be launched with root user."
+fi
+
+checkBin pixlet || errorMessage "This tool requires pixlet. Install it please, and then run this tool again. https://tidbyt.dev/docs/build/installing-pixlet"
+
+writeMessage "Currently installed apps:"
+pixlet list "${DEVICE}"
+
+assets="$currentDir/../assets"
+# Loop through files in the target directory
+for file in "$assets"/*; do
+    if [ -f "$file" ]; then
+        filename=$(basename -- "$file")
+
+        extension="${filename##*.}"
+        name="${filename%.*}"
+
+        if [[ "${extension}" == "webp" ]]; then
+            clean_name=${name//[\-]/0}
+            writeMessage "Currently uploading: [${filename} as ${clean_name}]"
+            pixlet push "${DEVICE}" "${file}" -t "${TOKEN}" -i "${clean_name}"
+        fi
+    fi
+done
