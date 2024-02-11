@@ -1,0 +1,27 @@
+#!/usr/bin/env abs
+
+find_cmd="fd -d 1 -i -g '*' -e webp --base-directory ../assets"
+files = `$find_cmd`.lines()
+fnd=files.len()
+echo("Found [${fnd}] files..")
+
+last = ""
+for file in files{
+
+	idx = file.last_index(".")
+	idx = idx
+	filename=file[:idx]
+	ext=file[idx:]
+
+	## get header
+	idx = filename.index("-")
+	header = filename[:idx]
+	if header != last {
+		header_title = header.title()
+		echo("#### ${header_title}")
+	}
+	last = header
+
+	echo("![${filename}](./assets/${filename}.webp)")
+
+}
