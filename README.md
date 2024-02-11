@@ -158,7 +158,9 @@ The `mklst.abs` file in the scripts directory can be ignored,it is just a simple
 ![logo-sega-002](./assets/logo-sega-002.webp)
 ![logo-wittij-001](./assets/logo-wittij-001.webp)
 #### Metalslug
+![metalslug-D8hYXES-001](./assets/metalslug-D8hYXES-001.webp)
 ![metalslug-boom-001](./assets/metalslug-boom-001.webp)
+![metalslug-elephant-001](./assets/metalslug-elephant-001.webp)
 ![metalslug-mummy-001](./assets/metalslug-mummy-001.webp)
 ![metalslug-mummy-002](./assets/metalslug-mummy-002.webp)
 ![metalslug-ufo-001](./assets/metalslug-ufo-001.webp)
@@ -168,9 +170,14 @@ The `mklst.abs` file in the scripts directory can be ignored,it is just a simple
 ![misc-coffee-002](./assets/misc-coffee-002.webp)
 ![misc-duck-001](./assets/misc-duck-001.webp)
 ![misc-eq-001](./assets/misc-eq-001.webp)
+#### Os
+![os-c64-001](./assets/os-c64-001.webp)
+![os-windows98-001](./assets/os-windows98-001.webp)
 #### Tv
 ![tv-botp-001](./assets/tv-botp-001.webp)
+![tv-cbs-001](./assets/tv-cbs-001.webp)
 ![tv-python-001](./assets/tv-python-001.webp)
+
 
 ## Building
 The only time you really need to do this is if you add additional arguments with argbash and need to regenerate the script.
